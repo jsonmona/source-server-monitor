@@ -49,7 +49,7 @@ def main():
             raise
 
     job_queue = application.job_queue
-    job_queue.run_repeating(monitor_server, interval=900, first=0)
+    job_queue.run_repeating(monitor_server, interval=900, first=5)
 
     application.run_polling()
 
