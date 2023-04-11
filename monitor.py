@@ -32,7 +32,7 @@ def main():
 
     bot = application.bot
 
-    async def monitor_server():
+    async def monitor_server(context):
         nonlocal last_status
 
         try:
