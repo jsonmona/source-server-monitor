@@ -49,3 +49,10 @@ Example:
   }
 }
 ```
+
+### Dependencies
+
+This project depends on following external libraries.
+You should install them with `pip intstall -r requirements.txt`.
+* python-a2s: For interacting with Source Server
+* python-telegram-bot[job-queue]: For sending messages when monitoring (optional)
