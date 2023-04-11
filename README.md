@@ -1,6 +1,6 @@
-## Valve Server Monitor
+## Source Server Monitor
 
-A simple monitoring application for game servers using Valve Source Engine Query.
+A simple monitoring application for game servers using Source Engine Query.
 
 This program is NOT for testing *the* Steam webpage!
 
