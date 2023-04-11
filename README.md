@@ -54,5 +54,17 @@ Example:
 
 This project depends on following external libraries.
 You should install them with `pip intstall -r requirements.txt`.
-* python-a2s: For interacting with Source Server
-* python-telegram-bot[job-queue]: For sending messages when monitoring (optional)
+- python-a2s: For interacting with Source Server
+- python-telegram-bot[job-queue]: For sending messages when monitoring (optional)
+
+
+## License
+
+This project is licensed under either of
+
+- [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([`LICENSE-APACHE.txt`](LICENSE-APACHE))
+- [MIT license](https://opensource.org/licenses/MIT) ([`LICENSE-MIT.txt`](LICENSE-MIT))
+
+at your option.
+
+The SPDX license identifier for this project is `MIT OR Apache-2.0`.
