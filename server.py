@@ -1,10 +1,9 @@
 import a2s
-import sys
-import json
 
 
-GAME_NAME = 'Space Engineers'
-USAGE = f'Usage: {sys.argv[0]} [-c] [address] [port]'
+# The appid from Steam. Set to None to ignore
+# https://store.steampowered.com/app/<appid>
+GAME_ID = 244850
 
 
 def query_info(ip, port):
@@ -19,6 +18,9 @@ def query_info(ip, port):
 def check_alive(ip, port):
     info = query_info(ip, port)
     if info is None:
+        return False
+
+    if GAME_ID is not None and info.game_id != GAME_ID:
         return False
 
     mods = None
@@ -44,28 +46,3 @@ def check_alive(ip, port):
     print(f'Map: "{info.map_name}"  Ping: {info.ping:.1f}  Mods: {mods}')
 
     return True
-
-
-def main():
-    if len(sys.argv) == 2 and sys.argv[1] == '-c':
-        with open('config.json', 'r', encoding='utf-8') as f:
-            obj = json.load(f)
-
-        check_alive(obj['address'], obj['port'])
-    elif len(sys.argv) == 3:
-        address = sys.argv[1]
-        port = sys.argv[2]
-
-        try:
-            port = int(port)
-        except ValueError:
-            print(USAGE)
-            return
-
-        check_alive(address, port)
-    else:
-        print(USAGE)
-
-
-if __name__ == '__main__':
-    main()
