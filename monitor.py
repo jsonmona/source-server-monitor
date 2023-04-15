@@ -3,7 +3,7 @@ import json
 from telegram import Bot
 from telegram.ext import Application
 
-from server import check_alive
+from server import query_info
 
 
 def main():
@@ -36,10 +36,10 @@ def main():
         nonlocal last_status
 
         try:
-            curr_status = check_alive(address, port)
+            curr_status = query_info(address, port)
             if last_status != curr_status:
-                if curr_status:
-                    await bot.send_message(chat_id=chat_id, text='Valve Server Monitor - Server started.')
+                if curr_status is not None:
+                    await bot.send_message(chat_id=chat_id, text=f'Valve Server Monitor - Server started.\nMap name: {curr_status.map_name}\nMods: {curr_status.mods_count}')
                 else:
                     await bot.send_message(chat_id=chat_id, text='Valve Server Monitor - Server stopped.')
 

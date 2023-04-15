@@ -1,12 +1,21 @@
 import a2s
 
+from dataclasses import dataclass
+
 
 # The appid from Steam. Set to None to ignore
 # https://store.steampowered.com/app/<appid>
 GAME_ID = 244850
 
 
-def query_info(ip, port):
+@dataclass
+class ServerInfo:
+    ping: float
+    map_name: str
+    mods_count: int
+
+
+def query_info_raw(ip, port):
     try:
         return a2s.info((str(ip), int(port)))
     except KeyboardInterrupt:
@@ -15,13 +24,13 @@ def query_info(ip, port):
         pass
 
 
-def check_alive(ip, port):
-    info = query_info(ip, port)
+def query_info(ip, port):
+    info = query_info_raw(ip, port)
     if info is None:
-        return False
+        return None
 
     if GAME_ID is not None and info.game_id != GAME_ID:
-        return False
+        return None
 
     mods = None
     for now in info.keywords.split(' '):
@@ -41,8 +50,6 @@ def check_alive(ip, port):
         mods = now_mods
 
     if mods is None:
-        mods = '(Unknown)'
+        mods = 0
 
-    print(f'Map: "{info.map_name}"  Ping: {info.ping:.1f}  Mods: {mods}')
-
-    return True
+    return ServerInfo(ping=info.ping, map_name=info.map_name, mods_count=mods)

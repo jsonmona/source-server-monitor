@@ -1,7 +1,7 @@
 import sys
 import json
 
-from server import check_alive
+from server import query_info
 
 
 USAGE = f'Usage: {sys.argv[0]} [-c] [address] [port]'
@@ -12,7 +12,7 @@ def main():
         with open('config.json', 'r', encoding='utf-8') as f:
             obj = json.load(f)
 
-        check_alive(obj['address'], obj['port'])
+        print(query_info(obj['address'], obj['port']))
     elif len(sys.argv) == 3:
         address = sys.argv[1]
         port = sys.argv[2]
@@ -23,7 +23,7 @@ def main():
             print(USAGE)
             return
 
-        check_alive(address, port)
+        print(query_info(address, port))
     else:
         print(USAGE)
 
