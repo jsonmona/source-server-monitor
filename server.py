@@ -1,6 +1,6 @@
 import a2s
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 # The appid from Steam. Set to None to ignore
@@ -10,7 +10,7 @@ GAME_ID = 244850
 
 @dataclass
 class ServerInfo:
-    ping: float
+    ping: float = field(compare=False)
     map_name: str
     mods_count: int
 
